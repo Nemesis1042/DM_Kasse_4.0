@@ -1,0 +1,2 @@
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.csproj.AssemblyReference.cache
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache

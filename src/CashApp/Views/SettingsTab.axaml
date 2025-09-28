@@ -1,0 +1,107 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CashApp.ViewModels"
+             x:Class="CashApp.Views.SettingsTab">
+
+    <Design.DataContext>
+        <vm:SettingsTabViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer Margin="10">
+        <StackPanel Spacing="20">
+            <TextBlock Text="Einstellungen" FontSize="24" FontWeight="Bold" />
+
+            <!-- Store Information -->
+            <GroupBox Header="Geschäftsinformationen">
+                <StackPanel Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Geschäftsname:" Width="120" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding StoreName}" Width="300" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Adresse:" Width="120" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding StoreAddress}" Width="300" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Telefon:" Width="120" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding StorePhone}" Width="300" />
+                    </StackPanel>
+                    <Button Content="Speichern" Command="{Binding SaveStoreInfoCommand}" HorizontalAlignment="Left" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Printer Settings -->
+            <GroupBox Header="Druckereinstellungen">
+                <StackPanel Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Drucker:" Width="120" VerticalAlignment="Center" />
+                        <ComboBox Items="{Binding AvailablePrinters}" SelectedItem="{Binding SelectedPrinter}" Width="200" />
+                        <Button Content="Testdruck" Command="{Binding TestPrintCommand}" />
+                    </StackPanel>
+                    <Button Content="Druckereinstellungen speichern" Command="{Binding SavePrinterSettingsCommand}" HorizontalAlignment="Left" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Backup Settings -->
+            <GroupBox Header="Sicherungseinstellungen">
+                <StackPanel Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Sicherungsverzeichnis:" Width="120" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding BackupDirectory}" Width="300" />
+                        <Button Content="..." Command="{Binding BrowseBackupDirectoryCommand}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Automatische Sicherung:" Width="120" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding AutoBackupTime}" Width="100" />
+                        <TextBlock Text="Uhr" VerticalAlignment="Center" />
+                        <CheckBox Content="Aktiviert" IsChecked="{Binding AutoBackupEnabled}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Sicherung erstellen" Command="{Binding CreateBackupCommand}" />
+                        <Button Content="Sicherung wiederherstellen" Command="{Binding RestoreBackupCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- System Information -->
+            <GroupBox Header="Systeminformationen">
+                <StackPanel Spacing="10">
+                    <Grid ColumnDefinitions="*,*">
+                        <StackPanel Grid.Column="0" Spacing="5">
+                            <TextBlock Text="Datenbankgröße:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding DatabaseSize}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="5">
+                            <TextBlock Text="Produkte:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding ProductCount}" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*">
+                        <StackPanel Grid.Column="0" Spacing="5">
+                            <TextBlock Text="Benutzer:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding UserCount}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="5">
+                            <TextBlock Text="Bestellungen:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding OrderCount}" />
+                        </StackPanel>
+                    </Grid>
+                    <Button Content="Datenbank bereinigen" Command="{Binding CleanupDatabaseCommand}" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Application Settings -->
+            <GroupBox Header="Anwendungseinstellungen">
+                <StackPanel Spacing="10">
+                    <CheckBox Content="Testmodus aktivieren" IsChecked="{Binding TestModeEnabled}" />
+                    <CheckBox Content="Detailliertes Logging" IsChecked="{Binding DetailedLogging}" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Theme:" VerticalAlignment="Center" />
+                        <ComboBox Items="{Binding AvailableThemes}" SelectedItem="{Binding SelectedTheme}" Width="150" />
+                    </StackPanel>
+                    <Button Content="Einstellungen speichern" Command="{Binding SaveSettingsCommand}" HorizontalAlignment="Left" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

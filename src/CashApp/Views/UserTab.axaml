@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CashApp.ViewModels"
+             x:Class="CashApp.Views.UserTab">
+
+    <Design.DataContext>
+        <vm:UserTabViewModel />
+    </Design.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,20">
+            <TextBlock Text="Benutzerverwaltung" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" />
+            <Button Content="Neuer Benutzer" Command="{Binding NewUserCommand}" />
+            <Button Content="Aktualisieren" Command="{Binding RefreshCommand}" />
+        </StackPanel>
+
+        <!-- Main Content -->
+        <DataGrid Grid.Row="1"
+                  Items="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}"
+                  Height="500"
+                  CanUserResizeColumns="True"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Benutzername" Binding="{Binding Username}" Width="*" />
+                <DataGridTextColumn Header="Name" Binding="{Binding FullName}" Width="200" />
+                <DataGridTextColumn Header="Rolle" Binding="{Binding Role}" Width="100" />
+                <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}" Width="200" />
+                <DataGridTextColumn Header="Letzte Anmeldung" Binding="{Binding LastLoginAt, StringFormat='dd.MM.yyyy HH:mm'}" Width="150" />
+                <DataGridTextColumn Header="Aktiv" Binding="{Binding IsActive}" Width="60" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CashApp.ViewModels"
+             x:Class="CashApp.Views.PfandTab">
+
+    <Design.DataContext>
+        <vm:PfandTabViewModel />
+    </Design.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
+            <TextBlock Text="Pfandverwaltung" FontSize="24" FontWeight="Bold" />
+            <TextBlock Text="Übersicht über Pfandbeträge und Rückgaben" />
+        </StackPanel>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" TabStripPlacement="Top">
+            <!-- Übersicht Tab -->
+            <TabItem Header="Übersicht">
+                <ScrollViewer>
+                    <StackPanel Spacing="20" Margin="10">
+                        <!-- Deposit Summary -->
+                        <GroupBox Header="Pfandbestand">
+                            <StackPanel Spacing="10">
+                                <Grid ColumnDefinitions="*,*">
+                                    <StackPanel Grid.Column="0" Spacing="5">
+                                        <TextBlock Text="Gesamtpfand:" FontWeight="Bold" FontSize="16" />
+                                        <TextBlock Text="{Binding TotalDepositBalance, StringFormat=C}" FontSize="24" Foreground="Green" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Spacing="5">
+                                        <TextBlock Text="Heutiger Pfand:" FontWeight="Bold" FontSize="16" />
+                                        <TextBlock Text="{Binding TodayDepositBalance, StringFormat=C}" FontSize="20" Foreground="Blue" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Separator />
+
+                                <TextBlock Text="Pfand nach Kategorie:" FontWeight="Bold" />
+                                <ItemsControl Items="{Binding DepositByCategory}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock Text="{Binding Key}" Width="120" />
+                                                <TextBlock Text="{Binding Value, StringFormat=C}" Width="100" TextAlignment="Right" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Daily Statistics -->
+                        <GroupBox Header="Tägliche Pfandstatistik">
+                            <StackPanel Spacing="10">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="Zeitraum:" VerticalAlignment="Center" />
+                                    <DatePicker SelectedDate="{Binding StatisticsStartDate}" />
+                                    <TextBlock Text="bis" VerticalAlignment="Center" />
+                                    <DatePicker SelectedDate="{Binding StatisticsEndDate}" />
+                                    <Button Content="Aktualisieren" Command="{Binding RefreshStatisticsCommand}" />
+                                </StackPanel>
+
+                                <DataGrid Items="{Binding DailyDepositStatistics}"
+                                          Height="200"
+                                          CanUserResizeColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Datum" Binding="{Binding Key, StringFormat='dd.MM.yyyy'}" Width="100" />
+                                        <DataGridTextColumn Header="Pfandbetrag" Binding="{Binding Value, StringFormat=C}" Width="120" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Produkte mit Pfand Tab -->
+            <TabItem Header="Produkte mit Pfand">
+                <StackPanel Margin="10" Spacing="10">
+                    <DataGrid Items="{Binding ProductsWithDeposit}"
+                              Height="400"
+                              CanUserResizeColumns="True"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                            <DataGridTextColumn Header="Kategorie" Binding="{Binding Category}" Width="120" />
+                            <DataGridTextColumn Header="Pfandbetrag" Binding="{Binding DepositAmount, StringFormat=C}" Width="100" />
+                            <DataGridTextColumn Header="Lagerbestand" Binding="{Binding StockQuantity}" Width="100" />
+                            <DataGridTextColumn Header="Preis" Binding="{Binding Price, StringFormat=C}" Width="100" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Pfandrückgabe Tab -->
+            <TabItem Header="Pfandrückgabe">
+                <StackPanel Margin="10" Spacing="20">
+                    <GroupBox Header="Pfandrückgabe erfassen">
+                        <StackPanel Spacing="15">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="Produkt:" VerticalAlignment="Center" Width="80" />
+                                <ComboBox Items="{Binding ProductsWithDeposit}"
+                                          SelectedItem="{Binding SelectedProductForReturn}"
+                                          DisplayMemberBinding="{Binding Name}"
+                                          Width="200" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="Anzahl:" VerticalAlignment="Center" Width="80" />
+                                <NumericUpDown Value="{Binding ReturnQuantity}"
+                                               Minimum="1"
+                                               Maximum="100"
+                                               Width="100" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="Rückgabebetrag:" VerticalAlignment="Center" Width="80" />
+                                <TextBlock Text="{Binding ReturnAmount, StringFormat=C}"
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="Green"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Button Content="Pfandrückgabe buchen"
+                                    Command="{Binding ProcessDepositReturnCommand}"
+                                    Background="Green"
+                                    Foreground="White"
+                                    HorizontalAlignment="Left"
+                                    Padding="20,10" />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <!-- Recent Returns -->
+                    <GroupBox Header="Letzte Pfandrückgaben">
+                        <DataGrid Items="{Binding RecentDepositReturns}"
+                                  Height="200"
+                                  CanUserResizeColumns="True"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding Timestamp, StringFormat='dd.MM.yyyy HH:mm'}" Width="150" />
+                                <DataGridTextColumn Header="Produkt" Binding="{Binding ProductName}" Width="*" />
+                                <DataGridTextColumn Header="Anzahl" Binding="{Binding Quantity}" Width="80" />
+                                <DataGridTextColumn Header="Betrag" Binding="{Binding Amount, StringFormat=C}" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

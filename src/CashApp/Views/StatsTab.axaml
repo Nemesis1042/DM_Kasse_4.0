@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CashApp.ViewModels"
+             x:Class="CashApp.Views.StatsTab">
+
+    <Design.DataContext>
+        <vm:StatsTabViewModel />
+    </Design.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
+            <TextBlock Text="Statistik & Auswertung" FontSize="24" FontWeight="Bold" />
+            <TextBlock Text="Umsatz- und Produktstatistiken" />
+        </StackPanel>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" TabStripPlacement="Top">
+            <!-- Umsatz Tab -->
+            <TabItem Header="Umsatz">
+                <StackPanel Margin="10" Spacing="20">
+                    <!-- Date Range Selection -->
+                    <GroupBox Header="Zeitraum auswählen">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Von:" VerticalAlignment="Center" />
+                            <DatePicker SelectedDate="{Binding StartDate}" />
+                            <TextBlock Text="Bis:" VerticalAlignment="Center" />
+                            <DatePicker SelectedDate="{Binding EndDate}" />
+                            <Button Content="Aktualisieren" Command="{Binding RefreshCommand}" />
+                            <Button Content="PDF Export" Command="{Binding ExportToPdfCommand}" />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <!-- Summary Statistics -->
+                    <GroupBox Header="Zusammenfassung">
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <StackPanel Grid.Column="0" Spacing="5">
+                                <TextBlock Text="Gesamtumsatz:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding TotalRevenue, StringFormat=C}" FontSize="18" Foreground="Green" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Spacing="5">
+                                <TextBlock Text="Bestellungen:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding TotalOrders}" FontSize="18" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Spacing="5">
+                                <TextBlock Text="Ø Bestellwert:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding AverageOrderValue, StringFormat=C}" FontSize="18" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="3" Spacing="5">
+                                <TextBlock Text="Tagesumsatz:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding AverageDailyRevenue, StringFormat=C}" FontSize="18" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Daily Revenue Chart Placeholder -->
+                    <GroupBox Header="Täglicher Umsatz">
+                        <DataGrid Items="{Binding DailyRevenue}"
+                                  Height="300"
+                                  CanUserResizeColumns="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Datum" Binding="{Binding Key, StringFormat='dd.MM.yyyy'}" Width="100" />
+                                <DataGridTextColumn Header="Umsatz" Binding="{Binding Value, StringFormat=C}" Width="120" />
+                                <DataGridTextColumn Header="Bestellungen" Binding="{Binding OrderCount}" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Produkte Tab -->
+            <TabItem Header="Produkte">
+                <StackPanel Margin="10" Spacing="10">
+                    <DataGrid Items="{Binding ProductStatistics}"
+                              Height="400"
+                              CanUserResizeColumns="True"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Produkt" Binding="{Binding ProductName}" Width="*" />
+                            <DataGridTextColumn Header="Verkauft" Binding="{Binding QuantitySold}" Width="100" />
+                            <DataGridTextColumn Header="Umsatz" Binding="{Binding Revenue, StringFormat=C}" Width="120" />
+                            <DataGridTextColumn Header="MwSt" Binding="{Binding TaxAmount, StringFormat=C}" Width="100" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Kategorien Tab -->
+            <TabItem Header="Kategorien">
+                <StackPanel Margin="10" Spacing="10">
+                    <DataGrid Items="{Binding CategoryStatistics}"
+                              Height="400"
+                              CanUserResizeColumns="True"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Kategorie" Binding="{Binding Category}" Width="*" />
+                            <DataGridTextColumn Header="Umsatz" Binding="{Binding Revenue, StringFormat=C}" Width="120" />
+                            <DataGridTextColumn Header="Anteil %" Binding="{Binding Percentage, StringFormat=F1}" Width="80" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

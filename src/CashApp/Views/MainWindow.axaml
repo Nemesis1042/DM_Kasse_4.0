@@ -1,0 +1,76 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CashApp.ViewModels"
+        xmlns:views="using:CashApp.Views"
+        x:Class="CashApp.Views.MainWindow"
+        Title="Kassensystem"
+        Width="1200"
+        Height="800"
+        WindowState="Maximized">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <DockPanel>
+        <!-- Top Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Datei">
+                <MenuItem Header="Sicherung erstellen" Command="{Binding CreateBackupCommand}" />
+                <MenuItem Header="Sicherung wiederherstellen" Command="{Binding RestoreBackupCommand}" />
+                <Separator />
+                <MenuItem Header="Beenden" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            <MenuItem Header="Extras">
+                <MenuItem Header="Testmodus" IsCheckable="True" IsChecked="{Binding IsTestMode}" />
+                <Separator />
+                <MenuItem Header="Datenbank bereinigen" Command="{Binding CleanupDatabaseCommand}" />
+            </MenuItem>
+            <MenuItem Header="Hilfe">
+                <MenuItem Header="Über" Command="{Binding AboutCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Status Bar -->
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Background="LightGray" Height="30">
+            <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center" Margin="10,0" />
+            <TextBlock Text=" | " VerticalAlignment="Center" Margin="5,0" />
+            <TextBlock Text="{Binding CurrentUserInfo}" VerticalAlignment="Center" Margin="5,0" />
+            <TextBlock Text=" | " VerticalAlignment="Center" Margin="5,0" />
+            <TextBlock Text="{Binding CurrentTime}" VerticalAlignment="Center" Margin="5,0" />
+        </StackPanel>
+
+        <!-- Main Content -->
+        <TabControl TabStripPlacement="Top" SelectedIndex="{Binding SelectedTabIndex}">
+            <!-- Kasse Tab -->
+            <TabItem Header="Kasse">
+                <views:CashTab DataContext="{Binding CashTabViewModel}" />
+            </TabItem>
+
+            <!-- Produkte Tab -->
+            <TabItem Header="Produkte">
+                <views:ProductTab DataContext="{Binding ProductTabViewModel}" />
+            </TabItem>
+
+            <!-- Pfand Tab -->
+            <TabItem Header="Pfand">
+                <views:PfandTab DataContext="{Binding PfandTabViewModel}" />
+            </TabItem>
+
+            <!-- Statistik Tab -->
+            <TabItem Header="Statistik">
+                <views:StatsTab DataContext="{Binding StatsTabViewModel}" />
+            </TabItem>
+
+            <!-- Einstellungen Tab -->
+            <TabItem Header="Einstellungen">
+                <views:SettingsTab DataContext="{Binding SettingsTabViewModel}" />
+            </TabItem>
+
+            <!-- Benutzerverwaltung Tab (Admin only) -->
+            <TabItem Header="Benutzerverwaltung" IsVisible="{Binding CanManageUsers}">
+                <views:UserTab DataContext="{Binding UserTabViewModel}" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

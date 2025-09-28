@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CashApp.ViewModels"
+        x:Class="CashApp.Views.LoginWindow"
+        Title="Kassen System - Login"
+        Width="400"
+        Height="300"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False">
+
+    <Design.DataContext>
+        <vm:LoginViewModel />
+    </Design.DataContext>
+
+    <StackPanel Margin="20" Spacing="15">
+        <TextBlock Text="Kassensystem Login"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20" />
+
+        <TextBox Name="txtUsername"
+                 Watermark="Benutzername"
+                 Text="{Binding Username}"
+                 Margin="0,5" />
+
+        <TextBox Name="txtPassword"
+                 Watermark="Passwort"
+                 PasswordChar="*"
+                 Text="{Binding Password}"
+                 Margin="0,5" />
+
+        <CheckBox Name="chkRememberMe"
+                  Content="Angemeldet bleiben"
+                  IsChecked="{Binding RememberMe}"
+                  Margin="0,10" />
+
+        <Button Name="btnLogin"
+                Content="Anmelden"
+                Command="{Binding LoginCommand}"
+                HorizontalAlignment="Stretch"
+                Height="40"
+                FontSize="16"
+                Margin="0,10" />
+
+        <TextBlock Name="txtError"
+                   Text="{Binding ErrorMessage}"
+                   Foreground="Red"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center" />
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Spacing="10"
+                    Margin="20,0,0,0">
+            <TextBlock Text="Version 1.0"
+                       FontSize="12"
+                       Foreground="Gray" />
+        </StackPanel>
+    </StackPanel>
+</Window>

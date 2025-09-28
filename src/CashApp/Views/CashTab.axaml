@@ -1,0 +1,142 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CashApp.ViewModels"
+             x:Class="CashApp.Views.CashTab">
+
+    <Design.DataContext>
+        <vm:CashTabViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="*,300" RowDefinitions="*,Auto">
+        <!-- Left Panel - Products and Cart -->
+        <ScrollViewer Grid.Column="0" Margin="10">
+            <StackPanel Spacing="10">
+                <!-- Product Search -->
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBox Text="{Binding SearchTerm}"
+                             Watermark="Produkte suchen..."
+                             Width="300" />
+                    <Button Content="Suchen" Command="{Binding SearchCommand}" />
+                </StackPanel>
+
+                <!-- Product Categories -->
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <Button Content="Alle" Command="{Binding SelectCategoryCommand}" CommandParameter="All" />
+                    <Button Content="Getränke" Command="{Binding SelectCategoryCommand}" CommandParameter="Getränke" />
+                    <Button Content="Essen" Command="{Binding SelectCategoryCommand}" CommandParameter="Essen" />
+                    <Button Content="Pfand" Command="{Binding SelectCategoryCommand}" CommandParameter="Pfand" />
+                    <Button Content="Sonstiges" Command="{Binding SelectCategoryCommand}" CommandParameter="Sonstiges" />
+                </StackPanel>
+
+                <!-- Products Grid -->
+                <ListBox Items="{Binding FilteredProducts}"
+                         SelectedItem="{Binding SelectedProduct}"
+                         Height="400"
+                         SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="{Binding Name}" Width="200" />
+                                <TextBlock Text="{Binding Price, StringFormat=C}" Width="80" />
+                                <TextBlock Text="{Binding Category}" Width="100" />
+                                <Button Content="Hinzufügen"
+                                        Command="{Binding $parent[Window].DataContext.AddProductCommand}"
+                                        CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right Panel - Cart and Payment -->
+        <Border Grid.Column="1" Margin="10" BorderBrush="Gray" BorderThickness="1">
+            <StackPanel Margin="10" Spacing="10">
+                <!-- Current Order Info -->
+                <TextBlock Text="Aktuelle Bestellung" FontSize="18" FontWeight="Bold" />
+
+                <!-- Cart Items -->
+                <ListBox Items="{Binding CurrentOrderItems}"
+                         Height="300">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="{Binding Product.Name}" Width="150" />
+                                <TextBlock Text="{Binding Quantity}" Width="30" TextAlignment="Center" />
+                                <TextBlock Text="x" Width="10" TextAlignment="Center" />
+                                <TextBlock Text="{Binding UnitPrice, StringFormat=C}" Width="60" />
+                                <TextBlock Text="=" Width="10" />
+                                <TextBlock Text="{Binding TotalAmount, StringFormat=C}" Width="80" />
+                                <Button Content="Entfernen"
+                                        Command="{Binding $parent[Window].DataContext.RemoveItemCommand}"
+                                        CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Order Summary -->
+                <StackPanel Spacing="5">
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1" Padding="0,5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Zwischensumme:" Width="100" />
+                            <TextBlock Text="{Binding Subtotal, StringFormat=C}" Width="80" TextAlignment="Right" />
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="MwSt:" Width="100" />
+                        <TextBlock Text="{Binding TaxAmount, StringFormat=C}" Width="80" TextAlignment="Right" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Pfand:" Width="100" />
+                        <TextBlock Text="{Binding DepositTotal, StringFormat=C}" Width="80" TextAlignment="Right" />
+                    </StackPanel>
+
+                    <Border BorderBrush="Black" BorderThickness="1" Padding="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Gesamt:" Width="100" FontWeight="Bold" />
+                            <TextBlock Text="{Binding TotalAmount, StringFormat=C}" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Payment Section -->
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Zahlung" FontSize="16" FontWeight="Bold" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Button Content="Bar" Command="{Binding SelectPaymentMethodCommand}" CommandParameter="Bar" />
+                        <Button Content="Karte" Command="{Binding SelectPaymentMethodCommand}" CommandParameter="Karte" />
+                        <Button Content="Gutschein" Command="{Binding SelectPaymentMethodCommand}" CommandParameter="Gutschein" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Bezahlt:" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding PaidAmount}" Width="100" />
+                        <TextBlock Text="€" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Rückgeld:" Width="100" />
+                        <TextBlock Text="{Binding ChangeAmount, StringFormat=C}" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                    </StackPanel>
+
+                    <Button Content="Zahlung abschließen"
+                            Command="{Binding CompletePaymentCommand}"
+                            Background="Green"
+                            Foreground="White"
+                            HorizontalAlignment="Stretch"
+                            Height="40" />
+                </StackPanel>
+
+                <!-- Quick Actions -->
+                <StackPanel Spacing="5">
+                    <Button Content="Neue Bestellung" Command="{Binding NewOrderCommand}" />
+                    <Button Content="Stornieren" Command="{Binding CancelOrderCommand}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
