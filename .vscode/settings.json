@@ -1,0 +1,6 @@
+{
+    "dotnet.defaultSolution": "CashApp.sln",
+    "dotnet.server.useOmnisharp": false,
+    "csharp.suppressDotnetInstallWarning": true,
+    "dotnet.preferOmnisharp": false
+}

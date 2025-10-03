@@ -1,2 +1,8 @@
 /home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.csproj.AssemblyReference.cache
 /home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/Avalonia/resources
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.AssemblyInfoInputs.cache
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.AssemblyInfo.cs
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.csproj.CoreCompileInputs.cache
+/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/obj/Debug/net8.0/CashApp.sourcelink.json

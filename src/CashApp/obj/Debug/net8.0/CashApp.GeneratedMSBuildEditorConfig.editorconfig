@@ -1,0 +1,48 @@
+is_global = true
+build_property.AvaloniaNameGeneratorIsEnabled = true
+build_property.AvaloniaNameGeneratorBehavior = InitializeComponent
+build_property.AvaloniaNameGeneratorDefaultFieldModifier = internal
+build_property.AvaloniaNameGeneratorFilterByPath = *
+build_property.AvaloniaNameGeneratorFilterByNamespace = *
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CashApp
+build_property.ProjectDir = /home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/App.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Resources/Styles.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/CashTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/LoginWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/PfandTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/ProductTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/SettingsTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/StatsTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/Views/UserTab.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

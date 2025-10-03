@@ -1,9 +1,93 @@
 {
   "format": 1,
   "restore": {
-    "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/CashApp.csproj": {}
+    "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp.Tests/CashApp.Tests.csproj": {}
   },
   "projects": {
+    "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp.Tests/CashApp.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp.Tests/CashApp.Tests.csproj",
+        "projectName": "CashApp.Tests",
+        "projectPath": "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp.Tests/CashApp.Tests.csproj",
+        "packagesPath": "/home/arkatosh/.nuget/packages/",
+        "outputPath": "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/arkatosh/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/CashApp.csproj": {
+                "projectPath": "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/CashApp.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.6.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/nix/store/c67p00lksmyafxl5mhpx8zm67jwk95gr-dotnet-sdk-8.0.300/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/home/arkatosh/Documents/Dobelmuehle/DM_Kasse_4.0/src/CashApp/CashApp.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -116,7 +200,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/nix/store/1d9l55vx9b7xjymrpxhycv8n4kyf309p-dotnet-sdk-8.0.317/share/dotnet/sdk/8.0.317/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/nix/store/c67p00lksmyafxl5mhpx8zm67jwk95gr-dotnet-sdk-8.0.300/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using CashApp.Models;
 using Microsoft.Extensions.Logging;
 using Serilog;

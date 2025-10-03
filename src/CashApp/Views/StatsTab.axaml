@@ -15,7 +15,7 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
-            <TextBlock Text="Statistik & Auswertung" FontSize="24" FontWeight="Bold" />
+            <TextBlock Text="Statistik &amp; Auswertung" FontSize="24" FontWeight="Bold" />
             <TextBlock Text="Umsatz- und Produktstatistiken" />
         </StackPanel>
 

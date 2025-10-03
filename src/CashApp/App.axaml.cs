@@ -5,6 +5,7 @@ using CashApp.Services;
 using CashApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using System;
 using System.IO;
 
 namespace CashApp

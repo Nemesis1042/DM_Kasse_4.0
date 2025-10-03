@@ -6,71 +6,53 @@
         Title="Kassensystem"
         Width="1200"
         Height="800"
+        WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <DockPanel>
-        <!-- Top Menu Bar -->
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Datei">
-                <MenuItem Header="Sicherung erstellen" Command="{Binding CreateBackupCommand}" />
-                <MenuItem Header="Sicherung wiederherstellen" Command="{Binding RestoreBackupCommand}" />
-                <Separator />
-                <MenuItem Header="Beenden" Command="{Binding ExitCommand}" />
-            </MenuItem>
-            <MenuItem Header="Extras">
-                <MenuItem Header="Testmodus" IsCheckable="True" IsChecked="{Binding IsTestMode}" />
-                <Separator />
-                <MenuItem Header="Datenbank bereinigen" Command="{Binding CleanupDatabaseCommand}" />
-            </MenuItem>
-            <MenuItem Header="Hilfe">
-                <MenuItem Header="Über" Command="{Binding AboutCommand}" />
-            </MenuItem>
-        </Menu>
-
-        <!-- Status Bar -->
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Background="LightGray" Height="30">
-            <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center" Margin="10,0" />
-            <TextBlock Text=" | " VerticalAlignment="Center" Margin="5,0" />
-            <TextBlock Text="{Binding CurrentUserInfo}" VerticalAlignment="Center" Margin="5,0" />
-            <TextBlock Text=" | " VerticalAlignment="Center" Margin="5,0" />
-            <TextBlock Text="{Binding CurrentTime}" VerticalAlignment="Center" Margin="5,0" />
-        </StackPanel>
-
-        <!-- Main Content -->
-        <TabControl TabStripPlacement="Top" SelectedIndex="{Binding SelectedTabIndex}">
-            <!-- Kasse Tab -->
+    <Grid RowDefinitions="*,Auto">
+        <!--Main Content Area-->
+        <TabControl Grid.Row="0" SelectedIndex="{Binding SelectedTabIndex}" Margin="5">
+            <!--Kasse Tab-->
             <TabItem Header="Kasse">
-                <views:CashTab DataContext="{Binding CashTabViewModel}" />
+                <views:CashTab />
             </TabItem>
-
-            <!-- Produkte Tab -->
+            <!--Produkte Tab-->
             <TabItem Header="Produkte">
-                <views:ProductTab DataContext="{Binding ProductTabViewModel}" />
+                <views:ProductTab />
             </TabItem>
-
-            <!-- Pfand Tab -->
+            <!--Pfand Tab-->
             <TabItem Header="Pfand">
-                <views:PfandTab DataContext="{Binding PfandTabViewModel}" />
+                <views:PfandTab />
             </TabItem>
-
-            <!-- Statistik Tab -->
-            <TabItem Header="Statistik">
-                <views:StatsTab DataContext="{Binding StatsTabViewModel}" />
+            <!--Statistiken Tab-->
+            <TabItem Header="Statistiken">
+                <views:StatsTab />
             </TabItem>
-
-            <!-- Einstellungen Tab -->
+            <!--Einstellungen Tab-->
             <TabItem Header="Einstellungen">
-                <views:SettingsTab DataContext="{Binding SettingsTabViewModel}" />
+                <views:SettingsTab />
             </TabItem>
-
-            <!-- Benutzerverwaltung Tab (Admin only) -->
-            <TabItem Header="Benutzerverwaltung" IsVisible="{Binding CanManageUsers}">
-                <views:UserTab DataContext="{Binding UserTabViewModel}" />
+            <!--Benutzer Tab-->
+            <TabItem Header="Benutzer" IsVisible="{Binding CanManageUsers}">
+                <views:UserTab />
             </TabItem>
         </TabControl>
-    </DockPanel>
+        <!--Status Bar-->
+        <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="0,1,0,0" Background="#F5F5F5">
+            <Grid ColumnDefinitions="*,*,*,Auto" Margin="10,5">
+                <!--Status Message-->
+                <TextBlock Grid.Column="0" Text="{Binding StatusMessage}" VerticalAlignment="Center" FontWeight="Bold" />
+                <!--Current User Info-->
+                <TextBlock Grid.Column="1" Text="{Binding CurrentUserInfo}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <!--Current Time-->
+                <TextBlock Grid.Column="2" Text="{Binding CurrentTime}" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <!--Test Mode Indicator-->
+                <Border Grid.Column="3" Background="{Binding IsTestMode, Converter={StaticResource BoolToColorConverter}}" CornerRadius="3" Padding="5,2" Margin="10,0,0,0">
+                    <TextBlock Text="TEST MODUS" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" />
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
